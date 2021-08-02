@@ -28,3 +28,11 @@ I recommend to use `vscode-solution-explorer` extension over vscode to show **Te
 - Add project to solution folder `dotnet sln SocialMedia.sln add SocialMedia.UnitTests/SocialMedia.UnitTests.csproj --solution-folder Tests`
 - xUnit Solution: New xunit project `dotnet new xunit -o SocialMedia.IntegrationTests`
 - Add project to solution folder `dotnet sln SocialMedia.sln add SocialMedia.IntegrationTests/SocialMedia.IntegrationTests.csproj --solution-folder Tests`
+
+## How to Install Entity Framework Core *inside SocialMedia.Infraestructure project*
+
+Reference: [https://docs.microsoft.com/en-us/ef/core/get-started/overview/install](https://docs.microsoft.com/en-us/ef/core/get-started/overview/install)
+
+- Entity Framework Core runtime and tools: `dotnet add package Microsoft.EntityFrameworkCore.SqlServer`
+- Entity Framework Core Design: `dotnet add package Microsoft.EntityFrameworkCore.Design`
+- Connect with an existing DB: `dotnet ef dbcontext scaffold "Server=DESKTOP-XXXXX\SQLEXPRESS;Database=SocialMedia;Integrated Security = true;" Microsoft.EntityFrameworkCore.SqlServer -o Data`
