@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace SocialMedia.Infraestructure.Data
+namespace SocialMedia.Core.Entities
 {
     public partial class Comentario
     {

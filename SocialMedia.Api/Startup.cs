@@ -14,6 +14,9 @@ using Microsoft.OpenApi.Models;
 
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Infraestructure.Repositories;
+using SocialMedia.Infraestructure.Data;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace SocialMedia.Api
 {
@@ -31,6 +34,11 @@ namespace SocialMedia.Api
         {
 
             services.AddControllers();
+
+
+            services.AddDbContext<SocialMediaContext>( options =>
+                options.UseSqlServer(Configuration.GetConnectionString("SocialMedia"))
+            );
             
             services.AddTransient<IPostRepository, PostRepository>();
 
