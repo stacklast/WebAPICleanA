@@ -12,6 +12,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
+using SocialMedia.Core.Interfaces;
+using SocialMedia.Infraestructure.Repositories;
+
 namespace SocialMedia.Api
 {
     public class Startup
@@ -28,6 +31,9 @@ namespace SocialMedia.Api
         {
 
             services.AddControllers();
+            
+            services.AddTransient<IPostRepository, PostRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SocialMedia.Api", Version = "v1" });
