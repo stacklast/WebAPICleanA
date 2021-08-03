@@ -7,5 +7,7 @@ namespace SocialMedia.Core.Interfaces
     public interface IPostRepository
     {
         Task<IEnumerable<Publicacion>> GetPosts();
+
+        Task<Publicacion> GetPost(int id);
     }
 }

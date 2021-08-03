@@ -33,6 +33,6 @@ I recommend to use `vscode-solution-explorer` extension over vscode to show **Te
 
 Reference: [https://docs.microsoft.com/en-us/ef/core/get-started/overview/install](https://docs.microsoft.com/en-us/ef/core/get-started/overview/install)
 
-- Entity Framework Core runtime and tools: `dotnet add package Microsoft.EntityFrameworkCore.SqlServer` Add in SocialMedia.Api to implement ConextionString
+- Entity Framework Core runtime and tools: `dotnet add package Microsoft.EntityFrameworkCore.SqlServer` Add in all projects
 - Entity Framework Core Design: `dotnet add package Microsoft.EntityFrameworkCore.Design`
 - Connect with an existing DB: `dotnet ef dbcontext scaffold "Server=DESKTOP-XXXXX\SQLEXPRESS;Database=SocialMedia;Integrated Security = true;" Microsoft.EntityFrameworkCore.SqlServer -o Data`

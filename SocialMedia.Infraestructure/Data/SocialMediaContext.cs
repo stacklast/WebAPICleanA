@@ -1,10 +1,7 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using SocialMedia.Core.Entities;
-
-#nullable disable
-
+using System.Reflection;
+using SocialMedia.Infraestructure.Data.Configurations;
 namespace SocialMedia.Infraestructure.Data
 {
     public partial class SocialMediaContext : DbContext
@@ -26,85 +23,12 @@ namespace SocialMedia.Infraestructure.Data
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<Comentario>(entity =>
-            {
-                entity.HasKey(e => e.IdComentario);
+            modelBuilder.ApplyConfiguration(new ComentarioConfiguration());
 
-                entity.ToTable("Comentario");
+            modelBuilder.ApplyConfiguration(new PublicacionConfiguration());
 
-                entity.Property(e => e.IdComentario).ValueGeneratedNever();
+            modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
 
-                entity.Property(e => e.Descripcion)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Fecha).HasColumnType("datetime");
-
-                entity.HasOne(d => d.IdPublicacionNavigation)
-                    .WithMany(p => p.Comentarios)
-                    .HasForeignKey(d => d.IdPublicacion)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Comentario_Publicacion");
-
-                entity.HasOne(d => d.IdUsuarioNavigation)
-                    .WithMany(p => p.Comentarios)
-                    .HasForeignKey(d => d.IdUsuario)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Comentario_Usuario");
-            });
-
-            modelBuilder.Entity<Publicacion>(entity =>
-            {
-                entity.HasKey(e => e.IdPublicacion);
-
-                entity.ToTable("Publicacion");
-
-                entity.Property(e => e.Descripcion)
-                    .IsRequired()
-                    .HasMaxLength(1000)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Fecha).HasColumnType("datetime");
-
-                entity.Property(e => e.Imagen)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.IdUsuarioNavigation)
-                    .WithMany(p => p.Publicacions)
-                    .HasForeignKey(d => d.IdUsuario)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Publicacion_Usuario");
-            });
-
-            modelBuilder.Entity<Usuario>(entity =>
-            {
-                entity.HasKey(e => e.IdUsuario);
-
-                entity.ToTable("Usuario");
-
-                entity.Property(e => e.Apellidos)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.FechaNacimiento).HasColumnType("date");
-
-                entity.Property(e => e.Nombres)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Telefono)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-            });
         }
     }
 }
