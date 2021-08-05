@@ -39,4 +39,19 @@ Reference: [https://docs.microsoft.com/en-us/ef/core/get-started/overview/instal
 
 ## Automapper
 
-- Install Automapper Dependency Injection over SocialMedia.Infraestructure, SocialMedia.Api `dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 8.1.1`
+- Add Automapper Dependency Injection over SocialMedia.Infraestructure, SocialMedia.Api `dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 8.1.1`
+
+## Newtonsoft.Json
+
+- Add over SocialMedia.Api project `dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson`
+
+## AspnetCore.Mvc
+
+- Add over SocialMedia.Infraestructure `dotnet add package Microsoft.AspNetCore.Mvc`
+
+## FluentValidation
+
+reference: [https://fluentvalidation.net/](https://fluentvalidation.net/)
+
+- Add over SocialMedia.Infraestructure, SocialMedia.Api `dotnet add package FluentValidation`
+- Add over SocialMedia.Infraestructure, SocialMedia.Api For integration with ASP.NET Core `dotnet add package FluentValidation.AspNetCore`

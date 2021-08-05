@@ -1,22 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Infraestructure.Repositories;
 using SocialMedia.Infraestructure.Data;
-using Microsoft.EntityFrameworkCore;
-
+using SocialMedia.Infraestructure.Filters;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Text;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 namespace SocialMedia.Api
 {
@@ -34,7 +35,14 @@ namespace SocialMedia.Api
         {
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                
+            }).ConfigureApiBehaviorOptions(options =>
+            {
+                // options.SuppressModelStateInvalidFilter = true;
+            });
 
 
             services.AddDbContext<SocialMediaContext>( options =>
@@ -42,6 +50,17 @@ namespace SocialMedia.Api
             );
             
             services.AddTransient<IPostRepository, PostRepository>();
+
+            services.AddMvc( options => 
+            {
+                options.Filters.Add<ValidationFilter>();
+                
+            }).AddFluentValidation(options => 
+            {
+                 options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+                
+            });
+
 
             services.AddSwaggerGen(c =>
             {
