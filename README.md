@@ -36,3 +36,7 @@ Reference: [https://docs.microsoft.com/en-us/ef/core/get-started/overview/instal
 - Entity Framework Core runtime and tools: `dotnet add package Microsoft.EntityFrameworkCore.SqlServer` Add in all projects
 - Entity Framework Core Design: `dotnet add package Microsoft.EntityFrameworkCore.Design`
 - Connect with an existing DB: `dotnet ef dbcontext scaffold "Server=DESKTOP-XXXXX\SQLEXPRESS;Database=SocialMedia;Integrated Security = true;" Microsoft.EntityFrameworkCore.SqlServer -o Data`
+
+## Automapper
+
+- Install Automapper Dependency Injection over SocialMedia.Infraestructure, SocialMedia.Api `dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 8.1.1`
